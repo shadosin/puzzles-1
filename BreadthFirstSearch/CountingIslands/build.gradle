@@ -1,0 +1,35 @@
+plugins {
+    id 'ata-curriculum.snippets-conventions'
+}
+
+checkstyle {
+    def suppressionFile = rootProject.file('Utilities/ATACheckstyle/configuration/checkstyle/unit1/suppressions.xml')
+    configProperties.put('checkstyle.suppression.filter', suppressionFile)
+}
+
+def wflowToTestsMap = [
+        'breadthfirstsearch-countingislands-test': [
+                'com.kenzie.breadthfirstsearch.countingislands.IslandCounterTest'
+        ]
+]
+
+wflowToTestsMap.forEach { wflowName, testList ->
+    tasks.register(wflowName) {
+        dependsOn wflowtest
+        test.doFirst {
+            filter {
+                testList.each { includeTestsMatching it }
+            }
+        }
+    }
+}
+
+def wflowToMainClassMap = [
+        'breadthfirstsearch-countingislands-app': 'com.kenzie.breadthfirstsearch.countingislands.IslandCounter'
+]
+wflowToMainClassMap.forEach { wflowName, mainClass ->
+    tasks.register(wflowName) {
+        runMain.mainClass.set(mainClass)
+        dependsOn runMain
+    }
+}
