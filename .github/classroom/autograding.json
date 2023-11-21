@@ -1,0 +1,104 @@
+{
+  "tests": [
+    {
+      "name": "GettingStarted BalancedParens I Do",
+      "setup": "",
+      "run": "./gradlew gettingstarted-balancedparens-i-do-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "GettingStarted BalancedParens We Do",
+      "setup": "",
+      "run": "./gradlew gettingstarted-balancedparens-we-do-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "GettingStarted BalancedParens You Do",
+      "setup": "",
+      "run": "./gradlew gettingstarted-balancedparens-you-do-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "GettingStarted Coins",
+      "setup": "",
+      "run": "./gradlew gettingstarted-coins-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "BFS MazeRunner closest exit",
+      "setup": "",
+      "run": "./gradlew breadthfirstsearch-mazerunner-findclosestexit-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "BFS MazeRunner shortest path",
+      "setup": "",
+      "run": "./gradlew breadthfirstsearch-mazerunner-findshortestpath-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "BFS CountingIslands",
+      "setup": "",
+      "run": "./gradlew breadthfirstsearch-countingislands-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "BFS WordSearch",
+      "setup": "",
+      "run": "./gradlew breadthfirstsearch-wordsearch-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "ExpandingWindow KRepeatingElements",
+      "setup": "",
+      "run": "./gradlew expandingwindow-krepeatingelements-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "ExpandingWindow MinimumWindow",
+      "setup": "",
+      "run": "./gradlew expandingwindow-minimumwindow-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    }
+  ]
+}
