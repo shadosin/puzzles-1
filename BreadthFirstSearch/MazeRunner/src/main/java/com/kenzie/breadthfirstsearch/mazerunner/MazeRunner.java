@@ -5,9 +5,7 @@ import com.kenzie.breadthfirstsearch.mazerunner.model.MazeSpace;
 import com.kenzie.breadthfirstsearch.mazerunner.sharedmodel.Node;
 import com.kenzie.breadthfirstsearch.mazerunner.utils.MazeGenerator;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.kenzie.breadthfirstsearch.mazerunner.SampleMazes.MAZE_ONE_EXIT;
 
@@ -38,6 +36,29 @@ public class MazeRunner {
      */
     public static Optional<MazeSpace> findClosestExit(MazePattern pattern) {
         Optional<Node<MazeSpace>> entrance = MazeGenerator.generateMaze(pattern);
+        if(entrance.isPresent()){
+            Queue<Node<MazeSpace>> queue = new LinkedList<>();
+            List<Node<MazeSpace>> visited = new ArrayList<>();
+
+            Node<MazeSpace> entranceNode = entrance.get();
+            queue.add(entranceNode);
+            visited.add(entranceNode);
+
+            while(!queue.isEmpty()){
+                Node<MazeSpace> current = queue.poll();
+                if(current.getValue().isExit()){
+                    return Optional.of(current.getValue());
+                }else{
+                    visited.add(current);
+                    for(Node<MazeSpace> neighbor : current.getNeighbors()){
+                        if(!visited.contains(neighbor)){
+                            queue.add(neighbor);
+                        }
+                    }
+                }
+
+            }
+        }
         return Optional.empty();
     }
 
@@ -49,6 +70,49 @@ public class MazeRunner {
      */
     public static List<MazeSpace> findShortestPathToExit(MazePattern pattern) {
         Optional<Node<MazeSpace>> entrance = MazeGenerator.generateMaze(pattern);
+
+
+        if (entrance.isPresent()) {
+            Node<MazeSpace> entranceNode = entrance.get();
+
+
+            List<MazeSpace> shortestPath = new ArrayList<>();
+
+            Map<Node<MazeSpace>, Node<MazeSpace>> parentMap = new HashMap<>();
+
+            Queue<Node<MazeSpace>> queue = new LinkedList<>();
+            Set<Node<MazeSpace>> visited = new HashSet<>();
+
+            queue.add(entranceNode);
+            visited.add(entranceNode);
+
+            while (!queue.isEmpty()) {
+                Node<MazeSpace> currentNode = queue.poll();
+
+                if (currentNode.getValue().isExit()) {
+
+                    Node<MazeSpace> tempNode = currentNode;
+
+                    while (tempNode != entranceNode) {
+                        shortestPath.add(tempNode.getValue());
+                        tempNode = parentMap.get(tempNode);
+                    }
+
+                    shortestPath.add(entranceNode.getValue());
+                    Collections.reverse(shortestPath);
+
+                    return shortestPath;
+                }
+
+                for (Node<MazeSpace> neighbor : currentNode.getNeighbors()) {
+                    if (!visited.contains(neighbor)) {
+                        queue.add(neighbor);
+                        visited.add(neighbor);
+                        parentMap.put(neighbor, currentNode);
+                    }
+                }
+            }
+        }
         return Collections.emptyList();
     }
 }

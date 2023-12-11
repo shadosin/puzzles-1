@@ -1,5 +1,8 @@
 package com.kenzie.gettingstarted.balance;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 /**
  * Drills to apply the problem-solving framework on variations of the Balanced Parentheses problem.
  */
@@ -15,8 +18,18 @@ public class BalancedParens {
      * @param parens A String of opening and closing parentheses
      * @return true if every opening and closing paren has a partner
      */
-    public boolean instructorMethodHere(String parens) {
-        return false;
+    public boolean areParensBalanced(String parens) {
+        int count = 0;
+        for(char c : parens.toCharArray()){
+            if(c == '('){
+                count ++;
+            }
+            if(c == ')'){
+                count --;
+            }
+
+        }
+        return count == 0;
     }
 
     /**
@@ -27,8 +40,31 @@ public class BalancedParens {
      * @param text A text String, described in the classroom.
      * @return True as described in the classroom, false otherwise.
      */
-    public boolean ourMethodHere(String text) {
-        return false;
+    public boolean areEnclosuresBalanced(String text) {
+        Stack<Character> stack = new Stack<>();
+        for(char c : text.toCharArray()){
+            if(c == '(' || c == '{' || c == '['){
+                stack.push(c);
+            }
+            if(c == ')' || c == '}' || c == ']'){
+
+                if(stack.isEmpty()){
+                    return false;
+                }
+
+                char check = stack.pop();
+                if(c == ')' && !(check == '(')){
+                    return false;
+                }
+                if(c == '}' && !(check == '{')){
+                    return false;
+                }
+                if(c == ']' && !(check == '[')){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
     }
 
     /**
@@ -39,8 +75,37 @@ public class BalancedParens {
      * @param text A text String, described in the classroom.
      * @return True as described in the classroom, false otherwise.
      */
-    public boolean yourMethodHere(String text) {
-        return false;
+    public boolean theSmileyMethod(String text) {
+        Stack<Character> stack = new Stack<>();
+        text = deleteSmileys(text);
+        for (char c : text.toCharArray()) {
+            if (c == '(' || c == '{' || c == '[') {
+
+                stack.push(c);
+            } else if (c == ')' || c == '}' || c == ']') {
+                if (stack.isEmpty()) {
+                    return false;
+                } else {
+                    char check = stack.pop();
+                    if (c == ')' && !(check == '(')) {
+                        return false;
+                    }
+                    if (c == '}' && !(check == '{')) {
+                        return false;
+                    }
+                    if (c == ']' && !(check == '[')) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return stack.isEmpty();
     }
+    private String deleteSmileys(String smiley) {
+        return smiley.replaceAll("[:][\\]\\[\\}\\{\\(\\)]", " ");
+    }
+
+
 
 }
